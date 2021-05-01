@@ -3,6 +3,40 @@
     padding: 0px; 
     box-sizing: border-box;
 }
+/* styling for main container */
+
+.container{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* styling for landing page */
+.landing{
+    margin-top: 60px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.button {
+    background-color: black;
+    border: none;
+    color: white;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    cursor: pointer;
+    border-radius: 8px;
+}
+
+.signup{
+    width: 150px;
+}
 
 /* Nav styling */
 nav{
@@ -16,7 +50,6 @@ nav{
 
 .logo{
     color: white;
-    text-transform: uppercase;
     letter-spacing: 3px;
     font-size: 20px;
 }
@@ -24,7 +57,7 @@ nav{
 .nav-links{
     display: flex;
     justify-content: space-around;
-    width: 30%;
+    width: 25%;
 }
 
 .nav-links li{
@@ -54,12 +87,6 @@ nav{
     transition: all 0.3s ease;
 }
 
-@media screen and (max-width: 768px){
-    .nav-links{
-        width: 60%;
-    }
-}
-
 /* nav Mobile styling */
 @media screen and (max-width: 768px){
     body{
@@ -76,7 +103,7 @@ nav{
         flex-direction: column;
         align-items: center;
         /*shows nav full screen in mobile*/
-        width: 100%;
+        width: 50%;
         transform: translateX(100%);
         transition: transform 0.5s ease-in;
     }
