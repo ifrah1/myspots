@@ -24,5 +24,19 @@ const navSlide = () => {
 
 }
 
+// https://www.w3schools.com/howto/howto_js_navbar_sticky.asp
+let navbar = document.querySelector('nav');
+let sticky = navbar.offsetTop;
+
+function myFunction() {
+    console.log(window.pageYOffset, sticky)
+    if (window.pageYOffset > sticky) {
+        navbar.classList.add("sticky")
+    } else {
+        navbar.classList.remove("sticky");
+    }
+}
+window.onscroll = function () { myFunction() };
+
 //invoke function 
 navSlide();
