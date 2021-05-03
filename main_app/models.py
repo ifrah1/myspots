@@ -12,6 +12,6 @@ class Spot(models.Model):
     def __str__(self):
         return self.title
 
-    # redirect once a new crypto is created
+    # redirect once a new spot is created
     # def get_absolute_url(self):
     #     return reverse('detail', kwargs={'spot_id': self.id})
