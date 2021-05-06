@@ -9,6 +9,46 @@
         <!-- Render the inputs inside of <tr>s & <td>s -->
         {{ form.as_table }}
     </table>
+    <div id="result">
+        <!--Position information will be inserted here-->
+    </div>
     <input type="submit" value="Submit!" class="btn">
+
 </form>
+
+<script>
+    let x = document.getElementById("demo");
+
+    // grab element for long and lat
+    let longitude = document.getElementById('id_longitude')
+    let latitude = document.getElementById('id_latitude')
+
+    function getLocation() {
+        // Store the element where the page displays the result
+        result = document.getElementById("result");
+
+        if (navigator.geolocation) {
+            navigator.geolocation.getCurrentPosition(showMap);
+            result.innerHTML = "Getting your position information, please wait...";
+        } else {
+            x.innerHTML = "Geolocation is not supported by this browser.";
+        }
+    }
+
+    // Define callback function for successful attempt
+    function showMap(position) {
+        // Get location data
+        lat = position.coords.latitude;
+        long = position.coords.longitude;
+
+        longitude.setAttribute('value', long)
+        latitude.setAttribute('value', lat)
+
+        result.innerHTML = "Your current position is (" + "Latitude: " + position.coords.latitude + ", " + "Longitude: " + position.coords.longitude + ")";
+    }
+
+    document.body.onload = function () {
+        getLocation();
+    };
+</script>
 {% endblock %}
