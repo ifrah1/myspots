@@ -9,5 +9,6 @@ urlpatterns = [
     # route for myspots
     # app.com/myspots shows all users spots
     # app.com/myspots/create/ lets user create a spot to save
-    
+    # route to create a spot
+    path('myspots/create/', views.SpotCreate.as_view(), name='spots_create'),
 ]

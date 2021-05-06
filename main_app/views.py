@@ -1,5 +1,11 @@
 from django.shortcuts import render, redirect
 
+# import models
+from .models import Spot
+
+# class based views
+from django.views.generic.edit import CreateView
+
 # Create your views here.
 
 # Define the home view
@@ -8,3 +14,8 @@ def home(request):
 
 def about(request):
     return render(request, 'about.html')
+
+class SpotCreate(CreateView):
+    model = Spot
+    # fields = '__all__'
+    fields = ['title','location','overview', 'longitude', 'latitude']
