@@ -7,6 +7,14 @@
     <div class="card-content">
         <span class="card-title">{{ spot.title }}</span>
         <p>Location: {{ spot.location }}</p>
+        <p>Overview: {{ spot.overview }}</p>
+        <p>longitude: {{ spot.longitude }}</p>
+        <p>latitude: {{ spot.latitude }}</p>
+    </div>
+
+    <div class="card-action">
+        <a href="{% url 'spots_update' spot.id %}">Edit</a>
+        <a href="{% url 'spots_delete' spot.id %}">Delete</a>
     </div>
 </div>
 

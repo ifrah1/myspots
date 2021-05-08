@@ -16,5 +16,9 @@ urlpatterns = [
 
     # app.com/myspots/:spot_id/ route for a single spot
     # route to see detail of a spot
-    path('myspots/<int:spot_id>/', views.spots_detail, name='detail')
+    path('myspots/<int:spot_id>/', views.spots_detail, name='detail'),
+
+    # delete and update route
+    path('myspots/<int:pk>/update/', views.SpotUpdate.as_view(), name='spots_update'),
+    path('myspots/<int:pk>/delete/', views.SpotDelete.as_view(), name='spots_delete'),
 ]
