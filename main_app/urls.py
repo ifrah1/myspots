@@ -21,4 +21,8 @@ urlpatterns = [
     # delete and update route
     path('myspots/<int:pk>/update/', views.SpotUpdate.as_view(), name='spots_update'),
     path('myspots/<int:pk>/delete/', views.SpotDelete.as_view(), name='spots_delete'),
+
+    # add photo route
+    path('myspots/<int:spot_id>/add_photo/', views.add_photo, name='add_photo'),
+
 ]

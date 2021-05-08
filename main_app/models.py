@@ -18,3 +18,11 @@ class Spot(models.Model):
     # redirect once a new spot is created
     def get_absolute_url(self):
         return reverse('detail', kwargs={'spot_id': self.id})
+
+
+class Photo(models.Model):
+    url = models.CharField(max_length=200)
+    spot = models.ForeignKey(Spot, on_delete=models.CASCADE)
+
+    def __str__(self):
+        return f"Photo for spot_id: {self.spot_id} @{self.url}"
