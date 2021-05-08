@@ -13,4 +13,8 @@ urlpatterns = [
     # app.com/myspots/create/ lets user create a spot to save
     # route to create a spot
     path('myspots/create/', views.SpotCreate.as_view(), name='spots_create'),
+
+    # app.com/myspots/:spot_id/ route for a single spot
+    # route to see detail of a spot
+    path('myspots/<int:spot_id>/', views.spots_detail, name='detail')
 ]

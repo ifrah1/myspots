@@ -5,10 +5,12 @@
 <div class="card-container">
     {% for spot in spots %}
     <div class="card">
-        <div class="card-content">
-            <span class="card-title">{{ spot.title }}</span>
-            <p>Location: {{ spot.location }}</p>
-        </div>
+        <a href="{% url 'detail' spot.id %}">
+            <div class="card-content">
+                <span class="card-title">{{ spot.title }}</span>
+                <p>Location: {{ spot.location }}</p>
+            </div>
+        </a>
     </div>
     {% endfor %}
 </div>

@@ -26,3 +26,7 @@ class SpotCreate(CreateView):
     model = Spot
     # fields = '__all__'
     fields = ['title','location','overview', 'longitude', 'latitude']
+
+def spots_detail(request, spot_id):
+    spot = Spot.objects.get(id=spot_id)
+    return render(request, 'spots/detail.html', { 'spot': spot })
