@@ -4,7 +4,7 @@ from django.shortcuts import render, redirect
 from .models import Spot
 
 # class based views
-from django.views.generic.edit import CreateView
+from django.views.generic.edit import CreateView, UpdateView, DeleteView
 
 # Create your views here.
 
@@ -30,3 +30,12 @@ class SpotCreate(CreateView):
 def spots_detail(request, spot_id):
     spot = Spot.objects.get(id=spot_id)
     return render(request, 'spots/detail.html', { 'spot': spot })
+
+# delete and update spots
+class SpotUpdate(UpdateView):
+    model = Spot
+    fields = ['title', 'location', 'overview']
+
+class SpotDelete(DeleteView):
+    model = Spot
+    success_url = '/Spots/'
