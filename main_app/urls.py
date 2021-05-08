@@ -17,4 +17,6 @@ urlpatterns = [
     # app.com/myspots/:spot_id/ route for a single spot
     # route to see detail of a spot
     path('myspots/<int:spot_id>/', views.spots_detail, name='detail')
+
+    # delete and update route
 ]
