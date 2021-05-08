@@ -1,5 +1,8 @@
 from django.db import models
 
+# Import the reverse function
+from django.urls import reverse
+
 # Create your models here.
 # crypto model
 class Spot(models.Model):
@@ -13,5 +16,5 @@ class Spot(models.Model):
         return self.title
 
     # redirect once a new spot is created
-    # def get_absolute_url(self):
-    #     return reverse('detail', kwargs={'spot_id': self.id})
+    def get_absolute_url(self):
+        return reverse('detail', kwargs={'spot_id': self.id})
