@@ -38,4 +38,4 @@ class SpotUpdate(UpdateView):
 
 class SpotDelete(DeleteView):
     model = Spot
-    success_url = '/Spots/'
+    success_url = '/myspots/'
