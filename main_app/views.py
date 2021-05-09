@@ -90,3 +90,25 @@ def add_photo(request, spot_id):
         except:
             print('An error occurred uploading file to S3')
     return redirect('detail', spot_id=spot_id)
+
+
+def map_view(request):
+    spots = Spot.objects.all()
+    
+    # logic to show map 
+    m = folium.Map(location=[0,0], zoom_start=1)
+    
+    # # add map marker 
+    for spot in spots:
+        aTag = '''<a href="{% url 'detail' {spot.id} %}"></a>'''
+        print(aTag)
+        folium.Marker([spot.latitude,spot.longitude], tooltip='Click for info', popup=spot.location).add_to(m)
+
+    # change map object to a html
+    m = m._repr_html_()
+    #-------
+    context = {
+        'm': m
+    }
+
+    return render(request, 'map.html', context)

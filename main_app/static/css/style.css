@@ -87,6 +87,11 @@ nav{
     transition: all 0.3s ease;
 }
 
+/* detail map style*/
+/* .folium-map{
+    width: 500px;
+} */
+
 /* nav Mobile styling */
 @media screen and (max-width: 768px){
     body{
