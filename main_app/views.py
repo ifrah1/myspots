@@ -52,6 +52,12 @@ def spots_detail(request, spot_id):
     m = folium.Map(location=[spot.latitude,spot.longitude], zoom_start=17)
     # add map marker 
     folium.Marker([spot.latitude,spot.longitude], tooltip='Click for info', popup=spot.location).add_to(m)
+
+    #add tiles to map
+    folium.raster_layers.TileLayer('Open Street Map').add_to(m)
+    folium.raster_layers.TileLayer('Stamen Terrain').add_to(m)
+    folium.LayerControl().add_to(m)
+
     # change map object to a html
     m = m._repr_html_()
     #-------
@@ -104,6 +110,11 @@ def map_view(request):
         aTag = f'<a href="/myspots/{spot.id}" target="_blank">Go spot page</a>'
         # print(aTag)
         folium.Marker([spot.latitude,spot.longitude], tooltip='Click for info', popup=aTag).add_to(m)
+
+    #add tiles to map
+    folium.raster_layers.TileLayer('Open Street Map').add_to(m)
+    folium.raster_layers.TileLayer('Stamen Terrain').add_to(m)
+    folium.LayerControl().add_to(m)
 
     # change map object to a html
     m = m._repr_html_()
