@@ -124,3 +124,8 @@ STATIC_URL = '/static/'
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+# Add this variable to specify where successful logins should redirect to
+LOGIN_REDIRECT_URL = '/myspots/'
+# Add this variable to specify where logging out redirects to
+LOGOUT_REDIRECT_URL = '/'

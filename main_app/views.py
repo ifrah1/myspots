@@ -13,6 +13,16 @@ import boto3 #aws s3 sdk
 # to show map need folium
 import folium
 
+# needed for signing up new user and login them in after 
+from django.contrib.auth import login
+from django.contrib.auth.forms import UserCreationForm
+
+# needed for authorization of routes
+# Import the login_required decorator
+from django.contrib.auth.decorators import login_required
+
+# Import the mixin for class-based views
+from django.contrib.auth.mixins import LoginRequiredMixin #needed for auth for class based views
 
 # variables needed for s4 buckets
 S3_BASE_URL = 'https://s3.us-east-1.amazonaws.com/'
@@ -28,9 +38,10 @@ def about(request):
     return render(request, 'about.html')
 
 # view all spots
+@login_required
 def spots_index(request):
     # spots = Spot.objects.filter(user=request.user)
-    spots = Spot.objects.all()
+    spots = Spot.objects.filter(user=request.user)
 
     context = {
         'spots': spots,
@@ -39,12 +50,21 @@ def spots_index(request):
     return render(request, 'spots/index.html',context)
 
 # create a spot
-class SpotCreate(CreateView):
+class SpotCreate(LoginRequiredMixin,CreateView):
     model = Spot
     # fields = '__all__'
     fields = ['title','location','overview', 'longitude', 'latitude']
 
+    # This inherited method is called when a
+    # valid spot form is being submitted
+    def form_valid(self, form):
+        # Assign the logged in user (self.request.user)
+        form.instance.user = self.request.user  # form.instance is the spot
+        # Let the CreateView do its job as usual
+        return super().form_valid(form)
+
 # display a single spot
+@login_required
 def spots_detail(request, spot_id):
     spot = Spot.objects.get(id=spot_id)
 
@@ -69,15 +89,16 @@ def spots_detail(request, spot_id):
     return render(request, 'spots/detail.html', context)
 
 # delete and update spots
-class SpotUpdate(UpdateView):
+class SpotUpdate(LoginRequiredMixin,UpdateView):
     model = Spot
     fields = ['title', 'location', 'overview']
 
-class SpotDelete(DeleteView):
+class SpotDelete(LoginRequiredMixin,DeleteView):
     model = Spot
     success_url = '/myspots/'
 
 # adds a photo to s3 buckets 
+@login_required
 def add_photo(request, spot_id):
     # photo-file will be the "name" attribute on the <input type="file">
     photo_file = request.FILES.get('photo-file', None)
@@ -97,9 +118,10 @@ def add_photo(request, spot_id):
             print('An error occurred uploading file to S3')
     return redirect('detail', spot_id=spot_id)
 
-
+# displays all user spots in a map with marker
+@login_required
 def map_view(request):
-    spots = Spot.objects.all()
+    spots = Spot.objects.filter(user=request.user)
     # print(spots)
     # logic to show map 
     m = folium.Map(location=[34.77764421466408,-55.5343331753092], zoom_start=4)
@@ -126,3 +148,24 @@ def map_view(request):
     }
 
     return render(request, 'map.html', context)
+
+
+# allows user to sign up to the site
+def signup(request):
+    error_message = ''
+    if request.method == 'POST':
+        # This is how to create a 'user' form object
+        # that includes the data from the browser
+        form = UserCreationForm(request.POST)
+        if form.is_valid():
+            # This will add the user to the database
+            user = form.save()
+            # This is how we log a user in via code
+            login(request, user)
+            return redirect('index')
+        else:
+            error_message = 'Invalid sign up - try again'
+    # A bad POST or a GET request, so render signup.html with an empty form
+    form = UserCreationForm()
+    context = {'form': form, 'error_message': error_message}
+    return render(request, 'registration/signup.html', context)
