@@ -28,4 +28,7 @@ urlpatterns = [
     # map view of my spot
     path('myspots/map/', views.map_view, name='map'),
 
+    # path to sign up a new user
+    path('accounts/signup/', views.signup, name='signup'),
+
 ]
