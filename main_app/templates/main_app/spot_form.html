@@ -3,7 +3,7 @@
 {% block content %}
 <!-- Leaving the action empty makes the form post to the same url used to display it -->
 {% if object %}
-<h1>Edit <span class="teal-text">{{object.title}}</span></h1>
+<h1>Edit <span class="blue-text">{{object.title}}</span></h1>
 {% else %}
 <h1>Add Spot</h1>
 {% endif %}
@@ -22,7 +22,7 @@
     </div>
     {% endif %}
 
-    <input type="submit" value="Submit!" class="btn">
+    <input type="submit" value="Submit!" class="btn blue darken-4">
 
 </form>
 
