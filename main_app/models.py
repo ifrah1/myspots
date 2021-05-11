@@ -3,6 +3,9 @@ from django.db import models
 # Import the reverse function
 from django.urls import reverse
 
+# import for auth
+from django.contrib.auth.models import User
+
 # Create your models here.
 # crypto model
 class Spot(models.Model):
@@ -11,6 +14,9 @@ class Spot(models.Model):
     overview = models.TextField(max_length=500)
     longitude = models.FloatField(default=0)
     latitude = models.FloatField(default=0)
+
+    # Add the foreign key linking to a user instance
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
 
     def __str__(self):
         return self.title
