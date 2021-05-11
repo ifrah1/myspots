@@ -48,10 +48,11 @@ nav{
     /* add font later */
 }
 
-.logo{
+.logo {
     color: white;
     letter-spacing: 3px;
     font-size: 20px;
+    text-decoration: none;
 }
 
 .nav-links{
@@ -86,6 +87,9 @@ nav{
     margin: 5px;
     transition: all 0.3s ease;
 }
+
+/* detail map style*/
+
 
 /* nav Mobile styling */
 @media screen and (max-width: 768px){

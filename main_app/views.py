@@ -10,6 +10,9 @@ from django.views.generic.edit import CreateView, UpdateView, DeleteView
 import uuid # helps generate random strings
 import boto3 #aws s3 sdk
 
+# to show map need folium
+import folium
+
 
 # variables needed for s4 buckets
 S3_BASE_URL = 'https://s3.us-east-1.amazonaws.com/'
@@ -28,7 +31,12 @@ def about(request):
 def spots_index(request):
     # spots = Spot.objects.filter(user=request.user)
     spots = Spot.objects.all()
-    return render(request, 'spots/index.html', {'spots': spots})
+
+    context = {
+        'spots': spots,
+    }
+
+    return render(request, 'spots/index.html',context)
 
 # create a spot
 class SpotCreate(CreateView):
@@ -36,9 +44,29 @@ class SpotCreate(CreateView):
     # fields = '__all__'
     fields = ['title','location','overview', 'longitude', 'latitude']
 
+# display a single spot
 def spots_detail(request, spot_id):
     spot = Spot.objects.get(id=spot_id)
-    return render(request, 'spots/detail.html', { 'spot': spot })
+
+    # logic to show map 
+    m = folium.Map(location=[spot.latitude,spot.longitude], zoom_start=17)
+    # add map marker 
+    folium.Marker([spot.latitude,spot.longitude], tooltip='Click for info', popup=spot.location).add_to(m)
+
+    #add tiles to map
+    folium.raster_layers.TileLayer('Open Street Map').add_to(m)
+    folium.raster_layers.TileLayer('Stamen Terrain').add_to(m)
+    folium.LayerControl().add_to(m)
+
+    # change map object to a html
+    m = m._repr_html_()
+    #-------
+
+    context = {
+        'spot': spot,
+        'm': m
+    }
+    return render(request, 'spots/detail.html', context)
 
 # delete and update spots
 class SpotUpdate(UpdateView):
@@ -68,3 +96,31 @@ def add_photo(request, spot_id):
         except:
             print('An error occurred uploading file to S3')
     return redirect('detail', spot_id=spot_id)
+
+
+def map_view(request):
+    spots = Spot.objects.all()
+    # print(spots)
+    # logic to show map 
+    m = folium.Map(location=[34.77764421466408,-55.5343331753092], zoom_start=4)
+    
+    # # add map marker 
+    for spot in spots:
+        # print(spot.id)
+        aTag = f'<a href="/myspots/{spot.id}" target="_blank">Go spot page</a>'
+        # print(aTag)
+        folium.Marker([spot.latitude,spot.longitude], tooltip='Click for info', popup=aTag).add_to(m)
+
+    #add tiles to map
+    folium.raster_layers.TileLayer('Open Street Map').add_to(m)
+    folium.raster_layers.TileLayer('Stamen Terrain').add_to(m)
+    folium.LayerControl().add_to(m)
+
+    # change map object to a html
+    m = m._repr_html_()
+    #-------
+    context = {
+        'm': m
+    }
+
+    return render(request, 'map.html', context)

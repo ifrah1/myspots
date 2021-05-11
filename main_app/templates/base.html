@@ -20,12 +20,13 @@
 <body>
     <nav>
         <div class="logo">
-            <a href="{% url 'home' %}">
+            <a class="logo" href="{% url 'home' %}">
                 <h4>MySpots</h4>
             </a>
         </div>
         <ul class="nav-links">
             <li><a href="{% url 'index' %}">View MySpots</a></li>
+            <li><a href="{% url 'map' %}">Map View</a></li>
             <li><a href="{% url 'spots_create' %}">Add Spot</a></li>
             <li><a href="{% url 'about' %}">About</a></li>
             <li><a href="#">Login</a></li>

@@ -25,4 +25,7 @@ urlpatterns = [
     # add photo route
     path('myspots/<int:spot_id>/add_photo/', views.add_photo, name='add_photo'),
 
+    # map view of my spot
+    path('myspots/map/', views.map_view, name='map'),
+
 ]
