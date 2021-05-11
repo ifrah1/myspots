@@ -94,15 +94,16 @@ def add_photo(request, spot_id):
 
 def map_view(request):
     spots = Spot.objects.all()
-    
+    # print(spots)
     # logic to show map 
-    m = folium.Map(location=[0,0], zoom_start=1)
+    m = folium.Map(location=[34.77764421466408,-55.5343331753092], zoom_start=4)
     
     # # add map marker 
     for spot in spots:
-        aTag = '''<a href="{% url 'detail' {spot.id} %}"></a>'''
-        print(aTag)
-        folium.Marker([spot.latitude,spot.longitude], tooltip='Click for info', popup=spot.location).add_to(m)
+        # print(spot.id)
+        aTag = f'<a href="/myspots/{spot.id}" target="_blank">Go spot page</a>'
+        # print(aTag)
+        folium.Marker([spot.latitude,spot.longitude], tooltip='Click for info', popup=aTag).add_to(m)
 
     # change map object to a html
     m = m._repr_html_()

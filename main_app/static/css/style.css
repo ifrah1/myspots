@@ -48,10 +48,11 @@ nav{
     /* add font later */
 }
 
-.logo{
+.logo {
     color: white;
     letter-spacing: 3px;
     font-size: 20px;
+    text-decoration: none;
 }
 
 .nav-links{
@@ -88,9 +89,7 @@ nav{
 }
 
 /* detail map style*/
-/* .folium-map{
-    width: 500px;
-} */
+
 
 /* nav Mobile styling */
 @media screen and (max-width: 768px){
