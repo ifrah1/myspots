@@ -17,6 +17,13 @@ import folium
 from django.contrib.auth import login
 from django.contrib.auth.forms import UserCreationForm
 
+# needed for authorization of routes
+# Import the login_required decorator
+from django.contrib.auth.decorators import login_required
+
+# Import the mixin for class-based views
+from django.contrib.auth.mixins import LoginRequiredMixin #needed for auth for class based views
+
 # variables needed for s4 buckets
 S3_BASE_URL = 'https://s3.us-east-1.amazonaws.com/'
 BUCKET = 'armyspots'
@@ -31,9 +38,10 @@ def about(request):
     return render(request, 'about.html')
 
 # view all spots
+@login_required
 def spots_index(request):
     # spots = Spot.objects.filter(user=request.user)
-    spots = Spot.objects.all()
+    spots = Spot.objects.filter(user=request.user)
 
     context = {
         'spots': spots,
@@ -42,7 +50,7 @@ def spots_index(request):
     return render(request, 'spots/index.html',context)
 
 # create a spot
-class SpotCreate(CreateView):
+class SpotCreate(LoginRequiredMixin,CreateView):
     model = Spot
     # fields = '__all__'
     fields = ['title','location','overview', 'longitude', 'latitude']
@@ -56,6 +64,7 @@ class SpotCreate(CreateView):
         return super().form_valid(form)
 
 # display a single spot
+@login_required
 def spots_detail(request, spot_id):
     spot = Spot.objects.get(id=spot_id)
 
@@ -80,15 +89,16 @@ def spots_detail(request, spot_id):
     return render(request, 'spots/detail.html', context)
 
 # delete and update spots
-class SpotUpdate(UpdateView):
+class SpotUpdate(LoginRequiredMixin,UpdateView):
     model = Spot
     fields = ['title', 'location', 'overview']
 
-class SpotDelete(DeleteView):
+class SpotDelete(LoginRequiredMixin,DeleteView):
     model = Spot
     success_url = '/myspots/'
 
 # adds a photo to s3 buckets 
+@login_required
 def add_photo(request, spot_id):
     # photo-file will be the "name" attribute on the <input type="file">
     photo_file = request.FILES.get('photo-file', None)
@@ -108,9 +118,10 @@ def add_photo(request, spot_id):
             print('An error occurred uploading file to S3')
     return redirect('detail', spot_id=spot_id)
 
-
+# displays all user spots in a map with marker
+@login_required
 def map_view(request):
-    spots = Spot.objects.all()
+    spots = Spot.objects.filter(user=request.user)
     # print(spots)
     # logic to show map 
     m = folium.Map(location=[34.77764421466408,-55.5343331753092], zoom_start=4)
