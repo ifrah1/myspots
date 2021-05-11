@@ -15,7 +15,7 @@ main {
 } 
 
 /*landing page styles*/
-.landing{
+.landing { 
     display: flex;
     justify-content: center;
     align-items: center;
@@ -26,12 +26,29 @@ main {
     background-size: cover;
 }
 
-.login-btn, .signup-btn{
+.login-btn, .signup-btn {
     width: 20vh;
     height: 5vh;
     margin: 10px 0;
     text-align: center;
     border-radius: 10px;
+}
+
+/* login form styles*/
+/* .login-form input {
+    color: white;
+} */
+
+/* signup form styles*/
+/* .signup-form input {
+    color: white;
+} */
+form input {
+    color: white;
+}
+
+textarea{
+    color:white
 }
 
 footer {
