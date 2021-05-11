@@ -1,0 +1,1 @@
+web: gunicorn myspots_project.wsgi
