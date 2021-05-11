@@ -26,7 +26,7 @@
 
 <body>
     <header class="navbar-fixed">
-        <nav class=" blue-grey darken-4">
+        <nav class="blue-grey darken-4">
             <div class="nav-wrapper">
                 {% if user.is_authenticated %}
                 <a href="{% url 'index' %}" class="brand-logo">MySpots</a>
@@ -53,17 +53,17 @@
         </nav>
     </header>
 
-    <ul class="sidenav" id="mobile-demo">
+    <ul class="sidenav blue-grey darken-4" id="mobile-demo">
         {% if user.is_authenticated %}
-        <li><a href="{% url 'index' %}">View MySpots</a></li>
-        <li><a href="{% url 'map' %}">Map View</a></li>
-        <li><a href="{% url 'spots_create' %}">Add Spot</a></li>
-        <li><a href="{% url 'about' %}">About</a></li>
-        <li><a href="{% url 'logout' %}">Log Out</a></li>
+        <li><a class="white-text" href="{% url 'index' %}">View MySpots</a></li>
+        <li><a class="white-text" href="{% url 'map' %}">Map View</a></li>
+        <li><a class="white-text" href="{% url 'spots_create' %}">Add Spot</a></li>
+        <li><a class="white-text" href="{% url 'about' %}">About</a></li>
+        <li><a class="white-text" href="{% url 'logout' %}">Log Out</a></li>
         {% else %}
-        <li><a href="{% url 'about' %}">About</a></li>
-        <li><a href="{% url 'signup' %}">Sign Up</a></li>
-        <li><a href="{% url 'login' %}">Login</a></li>
+        <li><a class="white-text" href="{% url 'about' %}">About</a></li>
+        <li><a class="white-text" href="{% url 'signup' %}">Sign Up</a></li>
+        <li><a class="white-text" href="{% url 'login' %}">Login</a></li>
         {% endif %}
     </ul>
 

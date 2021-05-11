@@ -34,21 +34,27 @@ main {
     border-radius: 10px;
 }
 
-/* login form styles*/
-/* .login-form input {
-    color: white;
-} */
-
-/* signup form styles*/
-/* .signup-form input {
-    color: white;
-} */
+/* form styling */
 form input {
     color: white;
 }
 
 textarea{
     color:white
+}
+
+/* style for index page*/
+
+.index {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+}
+
+.index-top {
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 footer {
