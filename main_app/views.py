@@ -107,9 +107,11 @@ def map_view(request):
     # # add map marker 
     for spot in spots:
         # print(spot.id)
-        aTag = f'<a href="/myspots/{spot.id}" target="_blank">Go spot page</a>'
+        aTag = f'<a href="/myspots/{spot.id}" target="_blank">{spot.title}</a> <br> {spot.overview}'
+        # setup popup size and info
+        popup = folium.Popup(aTag, max_width=400)
         # print(aTag)
-        folium.Marker([spot.latitude,spot.longitude], tooltip='Click for info', popup=aTag).add_to(m)
+        folium.Marker([spot.latitude,spot.longitude], tooltip='Click for info', popup=popup).add_to(m)
 
     #add tiles to map
     folium.raster_layers.TileLayer('Open Street Map').add_to(m)
