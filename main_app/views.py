@@ -44,6 +44,14 @@ class SpotCreate(CreateView):
     # fields = '__all__'
     fields = ['title','location','overview', 'longitude', 'latitude']
 
+    # This inherited method is called when a
+    # valid spot form is being submitted
+    def form_valid(self, form):
+        # Assign the logged in user (self.request.user)
+        form.instance.user = self.request.user  # form.instance is the spot
+        # Let the CreateView do its job as usual
+        return super().form_valid(form)
+
 # display a single spot
 def spots_detail(request, spot_id):
     spot = Spot.objects.get(id=spot_id)
