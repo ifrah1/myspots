@@ -14,6 +14,11 @@
             {% empty %}
             <div class="card-panel teal-text center-align">No Photos Uploaded</div>
             {% endfor %} -->
+            <!-- <img class="responsive-img card-panel" src="{{spot.photo.url}}"> -->
+
+            {% with spot.photo_set.all|first as first_object %}
+            <img class="responsive-img card-panel" src="{{ first_object.url }}">
+            {% endwith %}
 
             <a href="{% url 'detail' spot.id %}">
                 <div class="card-content">

@@ -1,5 +1,11 @@
 @import url('https://fonts.googleapis.com/css2?family=Cabin&display=swap');
 
+*{
+    margin: 0px;
+    padding: 0px; 
+    box-sizing: border-box;
+}
+
 body {
     display: flex;
     min-height: 100vh;
@@ -55,6 +61,17 @@ textarea{
     justify-content: center;
     align-items: center;
 }
+
+/* map view style*/
+.map-all {
+    margin-top: 25px;
+    height: 700px;
+}
+
+.map-all div > div{
+    height: 600px !important;
+}
+
 
 footer {
     padding-top: 0;
