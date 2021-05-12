@@ -1,18 +1,57 @@
 {% extends 'base.html' %}
 {% block content %}
 
-<h1>My Spots</h1>
-<div class="card-container">
-    {% for spot in spots %}
-    <div class="card">
-        <a href="{% url 'detail' spot.id %}">
-            <div class="card-content">
-                <span class="card-title">{{ spot.title }}</span>
-                <p>Location: {{ spot.location }}</p>
-            </div>
-        </a>
+<div class="index">
+    <div class="index-top">
+        <h1>All My Spots</h1>
     </div>
-    {% endfor %}
-</div>
 
-{% endblock %}
+    <div class="card-container row">
+        {% for spot in spots %}
+
+        {% with spot.photo_set.all|first as first_object %}
+        {% if first_object.url%}
+        <div class="card"
+            style="background-image: url('{{first_object.url}}'); background-position: center; background-repeat: no-repeat; background-size: cover;">
+            {% else %}
+
+            <div class="card"
+                style="background-image: url('https://images.unsplash.com/photo-1610813505759-ec15a7bdbc8f?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80'); background-position: center; background-repeat: no-repeat; background-size: cover;">
+
+                {% endif %}
+                {% endwith %}
+
+                <a class="white-text" href="{% url 'detail' spot.id %}">
+                    <div class="card-content">
+                        <span class="card-title">{{ spot.title }}</span>
+                        <p>Location: {{ spot.location }}</p>
+                    </div>
+                </a>
+            </div>
+            {% endfor %}
+        </div>
+
+        <div class="fixed-action-btn">
+            <a class="btn-floating btn-large teal darken-1" href="{% url 'spots_create' %}">
+                <i class="large material-icons">add</i>
+            </a>
+            <!-- <ul>
+            <li><a class="btn-floating red"><i class="material-icons">insert_chart</i></a></li>
+            <li><a class="btn-floating yellow darken-1"><i class="material-icons">format_quote</i></a></li>
+            <li><a class="btn-floating green"><i class="material-icons">publish</i></a></li>
+            <li><a class="btn-floating blue"><i class="material-icons">attach_file</i></a></li>
+        </ul> -->
+        </div>
+    </div>
+
+    <!-- <script>
+    document.addEventListener('DOMContentLoaded', function () {
+        var elems = document.querySelectorAll('.fixed-action-btn');
+        var instances = M.FloatingActionButton.init(elems, {
+            direction: 'left',
+            hoverEnabled: false
+        });
+    });
+</script> -->
+
+    {% endblock %}

@@ -69,7 +69,7 @@ def spots_detail(request, spot_id):
     spot = Spot.objects.get(id=spot_id)
 
     # logic to show map 
-    m = folium.Map(location=[spot.latitude,spot.longitude], zoom_start=17)
+    m = folium.Map(location=[spot.latitude,spot.longitude], zoom_start=15)
     # add map marker 
     folium.Marker([spot.latitude,spot.longitude], tooltip='Click for info', popup=spot.location).add_to(m)
 
@@ -124,7 +124,7 @@ def map_view(request):
     spots = Spot.objects.filter(user=request.user)
     # print(spots)
     # logic to show map 
-    m = folium.Map(location=[34.77764421466408,-55.5343331753092], zoom_start=4)
+    m = folium.Map(location=[38.9072,-77.0369], zoom_start=4)
     
     # # add map marker 
     for spot in spots:
