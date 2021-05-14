@@ -5,7 +5,7 @@
 
 <br>
 
-**App Summary**
+## App Summary
 
 Welcome to MySpots!
 
@@ -15,7 +15,7 @@ This gives users a spot to save all their favorite locations in one spot!
 
 <br/>
 
-**User Stories**
+## User Stories
 
 &nbsp;&nbsp;&nbsp;As a user…
 - I want to be able to register with a username and password to create a user account 
@@ -29,7 +29,7 @@ This gives users a spot to save all their favorite locations in one spot!
 
 <br/>
 
-**Wireframes**  
+## WireFrames 
 ![Home Page](./readme_docs/wireframe/home_landing_page.png)  
 ![Register Page](./readme_docs/wireframe/register_page.png)  
 ![Log In Page](./readme_docs/wireframe/login_page.png)   
@@ -40,5 +40,14 @@ This gives users a spot to save all their favorite locations in one spot!
 <br/>
 <br/>
 
-**ERD**  
+## ERD  
 ![Models](./readme_docs/ERD.png)
+
+
+## Technologies Used
+- Python
+- Django
+- Amazon S3
+- PostgreSQL
+- Heroku
+- Folium
